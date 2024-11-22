@@ -1,11 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import Button from "./components/Button";
-import CreateGame from "./components/CreateGame";
-import GameComponent from "./components/GameComponent";
 import CreateGameComponent from "./components/CreateGameComponent";
 import Alert from "./components/Alert";
 import "./output.css";
+import { updateWins } from "../helper/db";
 
 import {
     AddEntity,
@@ -1615,6 +1612,9 @@ const App: React.FC = () => {
                         const anteParsedData = anteComponentClient.coder.accounts.decode("anteroom", anteacc.data);
                         vault_token_account = anteParsedData.vaultTokenAccount;
                         mint_of_token_being_sent = anteParsedData.token;
+                        if (mint_of_token_being_sent.toString() == "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v") {
+                            await updateWins(publicKey?.toString() as string, 0, playerCashout);
+                        } 
                         owner_token_account = anteParsedData.gamemasterTokenAccount;
                         //supersize_token_account = anteParsedData.gamemasterTokenAccount;
                         supersize_token_account = await getAssociatedTokenAddress(mint_of_token_being_sent, new PublicKey("DdGB1EpmshJvCq48W1LvB1csrDnC4uataLnQbUVhp6XB"));
