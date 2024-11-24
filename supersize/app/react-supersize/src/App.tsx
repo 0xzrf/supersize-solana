@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import CreateGameComponent from "./components/CreateGameComponent";
 import Alert from "./components/Alert";
 import "./output.css";
-import { updateWins } from "../helper/db";
+import { updateWins } from "./helper/db";
 
 import {
     AddEntity,
@@ -65,6 +65,7 @@ import HeroSection from "./components/AppComps/HeroSection";
 import Info from "./components/AppComps/Info";
 import Footer from "./components/AppComps/Footer";
 import GameWrapper from "./components/AppComps/GameWrapper";
+import Leaderboard from "./components/AppComps/Leaderboard";
 
 const bs58 = require('bs58');
 
@@ -1614,7 +1615,7 @@ const App: React.FC = () => {
                         mint_of_token_being_sent = anteParsedData.token;
                         if (mint_of_token_being_sent.toString() == "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v") {
                             await updateWins(publicKey?.toString() as string, 0, playerCashout);
-                        } 
+                        }
                         owner_token_account = anteParsedData.gamemasterTokenAccount;
                         //supersize_token_account = anteParsedData.gamemasterTokenAccount;
                         supersize_token_account = await getAssociatedTokenAddress(mint_of_token_being_sent, new PublicKey("DdGB1EpmshJvCq48W1LvB1csrDnC4uataLnQbUVhp6XB"));
@@ -2478,143 +2479,151 @@ const App: React.FC = () => {
 
     return (
         <>
-            <div className="supersize">
-                <Navbar
-                    gameId={gameId}
-                    gameEnded={gameEnded}
-                    buildViewerNumber={buildViewerNumber}
-                    isMobile={isMobile}
-                    setIsDropdownOpen={setIsDropdownOpen}
-                    isDropdownOpen={isDropdownOpen}
-                    selectedOption={selectedOption}
-                    handleOptionClick={handleOptionClick}
-                    options={options}
-                    setbuildViewerNumber={setbuildViewerNumber}
-                    setIsHovered={setIsHovered}
-                    isHovered={isHovered}
-                    footerVisible={footerVisible}
-                    activeGames={activeGames}
-                    WalletMultiButton={WalletMultiButton}
-                />
-                <>
-                    {buildViewerNumber == 0 ? (
+            {
+                buildViewerNumber == 4 ? (
+                    <Leaderboard setbuildViewerNumber={setbuildViewerNumber} />
+                ) : (
+                    <div className="supersize">
+                        <Navbar
+                            gameId={gameId}
+                            gameEnded={gameEnded}
+                            buildViewerNumber={buildViewerNumber}
+                            isMobile={isMobile}
+                            setIsDropdownOpen={setIsDropdownOpen}
+                            isDropdownOpen={isDropdownOpen}
+                            selectedOption={selectedOption}
+                            handleOptionClick={handleOptionClick}
+                            options={options}
+                            setbuildViewerNumber={setbuildViewerNumber}
+                            setIsHovered={setIsHovered}
+                            isHovered={isHovered}
+                            footerVisible={footerVisible}
+                            activeGames={activeGames}
+                            WalletMultiButton={WalletMultiButton}
+                        />
                         <>
-                            <HeroSection
-                                gameId={gameId}
-                                gameEnded={gameEnded}
-                                playerName={playerName}
-                                handleNameChange={handleNameChange}
-                                activeGames={activeGames}
-                                buyIn={buyIn}
-                                setBuyIn={setBuyIn}
-                                expandlist={expandlist}
-                                setexpandlist={setexpandlist}
-                                openGameInfo={openGameInfo}
-                                setOpenGameInfo={setOpenGameInfo}
-                                handleClick={handleClick}
-                                inputValue={inputValue}
-                                handleInputChange={handleInputChange}
-                                handleKeyPress={handleKeyPress}
-                                handleImageClick={handleImageClick}
-                                joinGameTx={joinGameTx}
-                                setbuildViewerNumber={setbuildViewerNumber}
-                                handleSliderChange={handleSliderChange}
-                                setActiveGames={setActiveGames}
-                            />
-                        </>) : (
-                        <>
-                            {buildViewerNumber == 1 ? (
+                            {buildViewerNumber == 0 ? (
                                 <>
-                                    <Info
+                                    <HeroSection
                                         gameId={gameId}
                                         gameEnded={gameEnded}
-                                        footerVisible={footerVisible}
-                                        isHovered={isHovered}
-                                        setIsHovered={setIsHovered}
+                                        playerName={playerName}
+                                        handleNameChange={handleNameChange}
+                                        activeGames={activeGames}
+                                        buyIn={buyIn}
+                                        setBuyIn={setBuyIn}
+                                        expandlist={expandlist}
+                                        setexpandlist={setexpandlist}
+                                        openGameInfo={openGameInfo}
+                                        setOpenGameInfo={setOpenGameInfo}
+                                        handleClick={handleClick}
+                                        inputValue={inputValue}
+                                        handleInputChange={handleInputChange}
+                                        handleKeyPress={handleKeyPress}
+                                        handleImageClick={handleImageClick}
+                                        joinGameTx={joinGameTx}
                                         setbuildViewerNumber={setbuildViewerNumber}
-                                        activeGames={activeGames}
-                                        openDocs={openDocs}
-                                        openX={openX}
-                                        openTG={openTG}
-                                    />
-                                </>
-                            ) : (
-                                <div className="game-select" style={{ display: gameId == null && gameEnded == 0 ? 'flex' : 'none', height: '86vh', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-                                    <CreateGameComponent
-                                        connection={connection}
-                                        playerKey={playerKey}
-                                        walletRef={walletRef}
-                                        provider={provider}
-                                        providerEphemeralRollup={providerEphemeralRollup}
-                                        buildViewerNumber={buildViewerNumber}
-                                        isSubmitting={isSubmitting}
-                                        newGameCreated={newGameCreated}
-                                        activeGames={activeGames}
-                                        gamewallet={gamewallet}
-                                        setTransactionError={setTransactionError}
-                                        setTransactionSuccess={setTransactionSuccess}
-                                        setIsSubmitting={setIsSubmitting}
+                                        handleSliderChange={handleSliderChange}
                                         setActiveGames={setActiveGames}
-                                        setbuildViewerNumber={setbuildViewerNumber}
-                                        setNewGameCreated={setNewGameCreated}
-                                        setGameWallet={setGameWallet}
                                     />
-                                </div>
+                                </>) : (
+                                <>
+                                    {buildViewerNumber == 1 ? (
+                                        <>
+                                            <Info
+                                                gameId={gameId}
+                                                gameEnded={gameEnded}
+                                                footerVisible={footerVisible}
+                                                isHovered={isHovered}
+                                                setIsHovered={setIsHovered}
+                                                setbuildViewerNumber={setbuildViewerNumber}
+                                                activeGames={activeGames}
+                                                openDocs={openDocs}
+                                                openX={openX}
+                                                openTG={openTG}
+                                            />
+                                        </>
+                                    ) : (
+                                        <div className="game-select" style={{ display: gameId == null && gameEnded == 0 ? 'flex' : 'none', height: '86vh', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                                            <CreateGameComponent
+                                                connection={connection}
+                                                playerKey={playerKey}
+                                                walletRef={walletRef}
+                                                provider={provider}
+                                                providerEphemeralRollup={providerEphemeralRollup}
+                                                buildViewerNumber={buildViewerNumber}
+                                                isSubmitting={isSubmitting}
+                                                newGameCreated={newGameCreated}
+                                                activeGames={activeGames}
+                                                gamewallet={gamewallet}
+                                                setTransactionError={setTransactionError}
+                                                setTransactionSuccess={setTransactionSuccess}
+                                                setIsSubmitting={setIsSubmitting}
+                                                setActiveGames={setActiveGames}
+                                                setbuildViewerNumber={setbuildViewerNumber}
+                                                setNewGameCreated={setNewGameCreated}
+                                                setGameWallet={setGameWallet}
+                                            />
+                                        </div>
+                                    )}
+                                </>
                             )}
+                            <Footer
+                                gameId={gameId}
+                                gameEnded={gameEnded}
+                                buildViewerNumber={buildViewerNumber}
+                                isMobile={isMobile}
+                                currentTPS={currentTPS}
+                                price={price}
+                                isHovered={isHovered}
+                                setIsHovered={setIsHovered}
+                                setbuildViewerNumber={setbuildViewerNumber}
+                                openDocs={openDocs}
+                                openX={openX}
+                                openTG={openTG}
+                            />
+
                         </>
-                    )}
-                    <Footer
-                        gameId={gameId}
-                        gameEnded={gameEnded}
-                        buildViewerNumber={buildViewerNumber}
-                        isMobile={isMobile}
-                        currentTPS={currentTPS}
-                        price={price}
-                        isHovered={isHovered}
-                        setIsHovered={setIsHovered}
-                        setbuildViewerNumber={setbuildViewerNumber}
-                        openDocs={openDocs}
-                        openX={openX}
-                        openTG={openTG}
-                    />
+                        <GameWrapper
+                            gameId={gameId}
+                            players={players}
+                            visibleFood={visibleFood.flat()}
+                            currentPlayer={currentPlayer}
+                            screenSize={screenSize}
+                            scale={scale}
+                            gameEnded={gameEnded}
+                            setPlayerCashout={setPlayerCashout}
+                            playerCashout={playerCashout}
+                            playerTax={playerTax}
+                            cashoutTx={cashoutTx}
+                            reclaimTx={reclaimTx}
+                            exitTxn={exitTxn}
+                            handleExitClick={handleExitClick}
+                        />
+                        {(isSubmitting || isJoining) && (
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'flex-end',
+                                position: 'fixed',
+                                bottom: '120px',
+                                left: 0,
+                                width: '100%',
+                                zIndex: 1000,
+                            }}>
+                                <div className="spinner"></div>
+                            </div>
+                        )}
 
-                </>
-                <GameWrapper
-                    gameId={gameId}
-                    players={players}
-                    visibleFood={visibleFood.flat()}
-                    currentPlayer={currentPlayer}
-                    screenSize={screenSize}
-                    scale={scale}
-                    gameEnded={gameEnded}
-                    setPlayerCashout={setPlayerCashout}
-                    playerCashout={playerCashout}
-                    playerTax={playerTax}
-                    cashoutTx={cashoutTx}
-                    reclaimTx={reclaimTx}
-                    exitTxn={exitTxn}
-                    handleExitClick={handleExitClick}
-                />
-                {(isSubmitting || isJoining) && (
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'flex-end',
-                        position: 'fixed',
-                        bottom: '120px',
-                        left: 0,
-                        width: '100%',
-                        zIndex: 1000,
-                    }}>
-                        <div className="spinner"></div>
+                        {transactionError && <Alert type="error" message={transactionError} onClose={() => setTransactionError(null)} />}
+
+                        {(transactionSuccess && !isJoining) && <Alert type="success" message={transactionSuccess} onClose={() => setTransactionSuccess(null)} />}
                     </div>
-                )}
+                )
+            }
 
-                {transactionError && <Alert type="error" message={transactionError} onClose={() => setTransactionError(null)} />}
-
-                {(transactionSuccess && !isJoining) && <Alert type="success" message={transactionSuccess} onClose={() => setTransactionSuccess(null)} />}
-            </div>
         </>
+
     );
 };
 

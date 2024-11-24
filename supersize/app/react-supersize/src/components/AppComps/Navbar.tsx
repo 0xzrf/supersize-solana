@@ -130,7 +130,8 @@ function Navbar({
             <div className="left-side" style={{ alignItems: "center", justifyContent: "center", display: 'flex', zIndex: 9999999 }}>
                 <>
                     {buildViewerNumber != 1 ? (
-                        <div className="wallet-buttons" style={{ marginTop: "0vh", zIndex: 9999999 }}>
+                        <div className="wallet-buttons" style={{ marginTop: "3vh", zIndex: 9999999, display: "flex", alignItems: "center", gap: "4vh" }}>
+                            <img src="/leaderboard.png" alt="leaderboard" style={{width: "6vh", height: "6vh", marginTop: "4vh", cursor: "pointer"}} onClick={() => { setbuildViewerNumber(4); }} />
                             <WalletMultiButton />
                         </div>
                     ) : (

@@ -13,17 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Contests {
+  id String @id @default(cuid())
+  tokenAddress String
+  name         String
+  participants User[] 
+}
 
 model User {
-  walletAddress String @id
+  id String @id @default(cuid())
+  walletAddress String @unique
   name          String?
-  winning       Winning[]
+  winning       Winning?
+  contestRel    Contests @relation(fields: [contestId], references: [id])
+  contestId     String
+  @@unique([walletAddress, contestId])
 }
 
 model Winning {
-  userWalletAddress String @id
+  id String @id @default(cuid())
+  userWalletAddress String @unique
   usdc          Int @default(0)
   sol           Int @default(0)
   agld          Int @default(0)
-  user          User @relation(fields: [userWalletAddress], references: [walletAddress])
+  user          User? @relation(fields: [userWalletAddress], references: [walletAddress])
 }
