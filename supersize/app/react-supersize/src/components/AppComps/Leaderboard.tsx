@@ -31,7 +31,8 @@ const Leaderboard: React.FC<{setbuildViewerNumber: (number: number) => void}> = 
             color: "#fff",
             padding: "50px",
             paddingInline: "100px",
-            minHeight: "100vh",
+            height: "100vh",
+            overflow: "auto",
             fontFamily: '"VT323", monospace',
             fontWeight: 400,
             fontStyle: "normal"
