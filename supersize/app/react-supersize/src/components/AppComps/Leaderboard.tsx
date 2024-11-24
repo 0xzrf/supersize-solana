@@ -26,17 +26,8 @@ const Leaderboard: React.FC<{setbuildViewerNumber: (number: number) => void}> = 
     const [rank, setRank] = useState<number|null>(null);
 
     return (
-        <div style={{
-            backgroundColor: "#141A17",
-            color: "#fff",
-            padding: "50px",
-            paddingInline: "100px",
-            height: "100vh",
-            overflow: "auto",
-            fontFamily: '"VT323", monospace',
-            fontWeight: 400,
-            fontStyle: "normal"
-        }}>
+        <div 
+        className="bg-[#141A17] text-white p-[50px] px-[100px] h-screen overflow-auto font-['VT323'] font-normal">
             <svg 
                 viewBox="0 0 1024 1024" 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -53,17 +44,9 @@ const Leaderboard: React.FC<{setbuildViewerNumber: (number: number) => void}> = 
                     <path fill="#fff" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"></path>
                 </g>
             </svg>
-            <div style={{ marginBottom: "24px", display: "flex", alignItems: "center" }}>
+            <div className="mb-6 flex items-center">
                 <select id="season" 
-                        style={{
-                            width: "200px",
-                            padding: "8px",
-                            backgroundColor: "transparent",
-                            color: "#fff",
-                            border: "3px solid #fff",
-                            display: "flex",
-                            alignItems: "center"
-                        }}
+                        className="w-[200px] p-2 bg-transparent text-white border-[3px] border-white flex items-center"
                         value={season.name} 
                         onChange={(e) => {
                             const selectedOption = e.target.options[e.target.selectedIndex];
@@ -74,82 +57,72 @@ const Leaderboard: React.FC<{setbuildViewerNumber: (number: number) => void}> = 
                         }}>
                     <option 
                         value="USDC" 
-                       
-                        style={{backgroundColor: "#141A17"}}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                            <img src="/usdc.png" alt="USDC" style={{width: "24px", height: "24px", marginRight: "8px"}} />
+                        className="bg-[#141A17]">
+                        <div className="flex items-center">
+                            <img src="/usdc.png" alt="USDC" className="w-6 h-6 mr-2" />
                             USDC
                         </div>
                     </option>
                     <option 
                         value="SOL" 
-                        style={{backgroundColor: "#141A17"}}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                            <img src="/bonk.png" alt="BONK" style={{width: "24px", height: "24px", marginRight: "8px"}} />
+                        className="bg-[#141A17]">
+                        <div className="flex items-center">
+                            <img src="/bonk.png" alt="BONK" className="w-6 h-6 mr-2" />
                             SOL
                         </div>
                     </option>
                     <option 
                         value="AGLD"
-                        style={{backgroundColor: "#141A17"}}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                            <img src="/bonk.png" alt="BONK" style={{width: "24px", height: "24px", marginRight: "8px"}} />
+                        className="bg-[#141A17]">
+                        <div className="flex items-center">
+                            <img src="/bonk.png" alt="BONK" className="w-6 h-6 mr-2" />
                             AGLD
                         </div>
                     </option>
                 </select>
             </div>
-            <div style={{position: "relative", marginTop: "60px"}}>
-                <h2 style={{
-                    position: "absolute",
-                    top: "-36px",
-                    left: "10px",
-                    fontSize: "30px",
-                    backgroundColor: "#141A17",
-                    padding: "10px",
-                    color:"#3BAC71"
-                }}>
+            <div className="relative mt-12">
+                <h2 className="absolute top-[-36px] left-[10px] font-['VT323'] text-[30px] bg-[#141A17] p-[10px] text-[#3BAC71]">
                     MY RANKING
                 </h2>
-                <div style={{ border: "1px solid #fff", padding: "24px", marginBottom: "24px" }}>
-                    <div style={{ display: "flex", gap: "32px" }}>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "50%" }}>
-                            <div style={{ textAlign: "center", marginBottom: "16px" }}>
-                                <div style={{ fontSize: "25px", opacity: 0.8, marginBottom: "4px", color: "gray" }}>Global Ranking</div>
-                                <div style={{ fontSize: "40px", color: "#3BAC71" }}>
-                                    922 <span style={{ fontSize: "16px", opacity: 0.8, color: "#fff" }}>/ 93,602</span>
+                <div className="border border-white p-6 mb-6">
+                    <div className="flex gap-8">
+                        <div className="flex justify-center items-center w-1/2">
+                            <div className="text-center mb-4">
+                                <div className="text-[25px] opacity-80 mb-1 text-gray-400">Global Ranking</div>
+                                <div className="text-[40px] text-[#3BAC71]">
+                                    922 <span className="text-base opacity-80 text-white">/ 93,602</span>
                                 </div>
                             </div>
                         </div>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "50%" }}>
-                            <div style={{ textAlign: "center", marginBottom: "16px" }}>
-                                <div style={{ fontSize: "25px", opacity: 0.8, marginBottom: "4px", color: "gray" }}>Total Points</div>
-                                <div style={{ fontSize: "40px", color: "#3BAC71" }}>387,514</div>
+                        <div className="flex justify-center items-center w-1/2">
+                            <div className="text-center mb-4">
+                                <div className="text-[25px] opacity-80 mb-1 text-gray-400">Total Points</div>
+                                <div className="text-[40px] text-[#3BAC71]">387,514</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                <thead style={{width: "100vw", borderBottom: "1px solid gray", fontSize: "24px", color: "#00FF00"}}>
+            <table className="w-full border-collapse">
+                <thead className="w-screen border-b border-gray-500 text-2xl text-[#00FF00]">
                     <tr>
-                        <th style={{ textAlign: "left", padding: "12px", opacity: 0.8 }}>Rank</th>
-                        <th style={{ textAlign: "left", padding: "12px", opacity: 0.8 }}>Player</th>
-                        <th style={{ textAlign: "right", padding: "12px", opacity: 0.8 }}>Total</th>
+                        <th className="text-left p-3 opacity-80">Rank</th>
+                        <th className="text-left p-3 opacity-80">Player</th>
+                        <th className="text-right p-3 opacity-80">Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     {players.map((player, i) => (
-                        <tr key={player.rank} onMouseEnter={() => setRank(i)} onMouseLeave={() => setRank(null)} style={{ backgroundColor: rank === i ? "#002200" : "transparent" }}>
-                            <td style={{ textAlign: "left", padding: "12px", fontSize: "18px" }}>{player.rank}</td>
-                            <td style={{ textAlign: "left", padding: "12px", fontSize: "18px" }}>
-                                <div style={{ display: "flex", alignItems: "center" }}>
-                                    <span style={{ fontSize: "18px" }}>{player.name}</span>
+                        <tr key={player.rank} onMouseEnter={() => setRank(i)} onMouseLeave={() => setRank(null)} className={`${rank === i ? 'bg-[#002200]' : 'bg-transparent'}`}>
+                            <td className="text-left p-3 text-lg">{player.rank}</td>
+                            <td className="text-left p-3 text-lg">
+                                <div className="flex items-center">
+                                    <span className="text-lg">{player.name}</span>
                                 </div>
                             </td>
-
-                            <td style={{ textAlign: "right", padding: "12px", fontSize: "18px" }}>{player.total.toLocaleString()}</td>
+                            <td className="text-right p-3 text-lg">{player.total.toLocaleString()}</td>
                         </tr>
                     ))}
                 </tbody>

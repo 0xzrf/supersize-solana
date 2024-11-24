@@ -45,17 +45,7 @@ body {
   height: 100vh;
   overflow: hidden;
 }
-.topbar {
-    display: flex;
-    align-items: center; 
-    justify-content: space-between;
-    height: fit-content;
-    margin-bottom: 0;
-    height: 4vh;
-    background-color: #000;
-    z-index: 0;
-    backdrop-filter: blur(10px);
-}
+
 .titleBackground{
   color: #eee;
   font-family: 'Conthrax' !important;
@@ -274,22 +264,8 @@ overflow: hidden;
   margin-top: -7vw;
 }
 
-.playerNameText {
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: left;
-  font-size: 1rem;
-  border: none;
-  background-color: transparent;
-  font-family: 'Terminus';
-  overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none; 
-}
+
+
 .buyInSlider {
   background-color: #000;
   grid-column: span 2;

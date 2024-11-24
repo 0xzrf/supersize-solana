@@ -33,7 +33,7 @@ function Info({
                 <img src={`${process.env.PUBLIC_URL}/supersizemaybe.png`} alt="Spinning" className="info-spinning-image" />
             </div>
             <div className="info-text-container" style={{ width: footerVisible ? '100%' : '65%', paddingLeft: footerVisible ? '0' : '20px', paddingRight: footerVisible ? '0' : '6vw' }}>
-                <div className="info-scrolling-text">
+                <div className="info-scrolling-text leading-[10vh]">
                     <p>Supersize is a live multiplayer feeding frenzy game. Players must eat or be eaten to become the biggest onchain.
                         <br></br>
                         <br></br>

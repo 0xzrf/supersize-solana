@@ -600,7 +600,7 @@ body {
   overflow: hidden;
 }
 
-.topbar {
+/* .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -612,7 +612,7 @@ body {
   z-index: 0;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
-}
+} */
 
 .titleBackground{
   color: #eee;
