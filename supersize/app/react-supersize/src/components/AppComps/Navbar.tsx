@@ -1,7 +1,6 @@
 import { PublicKey } from '@solana/web3.js';
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../Button';
-
 interface NavbarProps {
     gameId: PublicKey | null;
     gameEnded: number;
@@ -37,21 +36,25 @@ function Navbar({
     activeGames,
     WalletMultiButton,
 }: NavbarProps) {
+
+    const [leaderBoardActive, setLeaderboardActive] = useState(false)
+
     return (
-        <div className={`topbar flex items-center justify-between mb-0 h-[4vh] bg-black z-0 backdrop-blur-lg ${gameId == null && gameEnded == 0 ? "flex" : "none"} ${isMobile && buildViewerNumber == 1 ? 'h-[20vh]' : buildViewerNumber == 1 ? 'h-[10vh]' : 'h-[4vh]'} ${buildViewerNumber == 1 ? 'bg-black/30' : 'bg-black'}  z-[9999999]`} >
+
+        <div className="topbar" style={{ display: gameId == null && gameEnded == 0 ? 'flex' : 'none', background: buildViewerNumber == 1 ? "rgba(0, 0, 0, 0.3)" : "rgb(0, 0, 0)", height: isMobile && buildViewerNumber == 1 ? '20vh' : buildViewerNumber == 1 ? '10vh' : '4vh', zIndex: 9999999 }}>
             {buildViewerNumber == 0 ? (
                 <>
                     <div
-                        className="relative inline-block cursor-pointer font-terminus select-none mt-[4vh] ml-[2vw] w-[120px]"
+                        className="dropdown-container"
                         onClick={() => setIsDropdownOpen((prev: boolean) => !prev)}
                     >
-                        <div className={`p-2.5 w-30 bg-black text-white border border-gray-300 rounded-lg text-center ${isDropdownOpen ? "open" : ""}`} style={{fontFamily: "Terminus"}}>
-                            <span className="dot green-dot"/>
+                        <div className={`selected-option ${isDropdownOpen ? "open" : ""}`}>
+                            <span className="dot green-dot" />
                             {selectedOption}
                         </div>
-                        
+
                         {isDropdownOpen && (
-                            <div className="absolute top-full left-0 w-[120px] bg-black border border-t-0 border-gray-300 rounded-b-[10px] shadow-lg z-[1]">
+                            <div className="dropdown-menu">
                                 {options
                                     .filter((option) => option !== selectedOption)
                                     .map((option) => (
@@ -70,7 +73,7 @@ function Navbar({
                             </div>
                         )}
                     </div>
-                    <span className="flex items-center justify-center text-center  h-12 rounded-[10px] mr-[1vw] font-bold text-[#ffef8a] border border-[#ffef8a] ml-0 w-fit pl-[10px] pr-[10px] mt-[5vh] bg-black" style={{ fontFamily: "Terminus"}}>Supersize is an eat or be eaten multiplayer game, live on the Solana blockchain</span>
+                    <span className="free-play" style={{ color: "#FFEF8A", borderColor: "#FFEF8A", marginLeft: "0vw", width: "fit-content", paddingLeft: "10px", paddingRight: "10px", marginTop: "5vh", background: "black" }}>Supersize is an eat or be eaten multiplayer game, live on the Solana blockchain</span>
                 </>
             ) :
                 (
@@ -78,12 +81,21 @@ function Navbar({
                         <>
                             {buildViewerNumber == 1 ?
                                 (
-                                    <span className="text-white font-[Conthrax] text-5xl pl-[2vw] pt-[1vh] z-10 opacity-100 hover:cursor-pointer" onClick={(e) => { e.stopPropagation(); setbuildViewerNumber(0); }}> SUPERSIZE </span>
+                                    <span className="titleText" style={{ cursor: "pointer" }} onClick={(e) => { e.stopPropagation(); setbuildViewerNumber(0); }}> SUPERSIZE </span>
                                 ) : (
                                     <div>
                                         <>
                                             <div
-                                                className="w-[4vh] h-[4vh] mt-[4vh] ml-[2vw] flex items-center justify-center cursor-pointer"
+                                                style={{
+                                                    width: '4vh',
+                                                    height: '4vh',
+                                                    display: 'flex',
+                                                    cursor: "pointer",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    marginLeft: "2vw",
+                                                    marginTop: "4vh"
+                                                }}
                                                 onMouseEnter={() => setIsHovered([false, false, false, false, false, true])}
                                                 onMouseLeave={() => setIsHovered([false, false, false, false, false, false])}
                                                 onClick={() => { setbuildViewerNumber(0); setIsHovered([false, false, false, false, false]); }}
@@ -93,7 +105,11 @@ function Navbar({
                                                     width="35px"
                                                     height="auto"
                                                     alt="Image"
-                                                    className={`absolute ${isHovered[5] ? 'opacity-20' : 'opacity-80'} transition-[opacity,background,color] duration-300 ease-in-out`}
+                                                    style={{
+                                                        position: "absolute",
+                                                        opacity: isHovered[5] ? 0.2 : 0.8,
+                                                        transition: 'opacity 0.0s ease background 0.3s ease 0s, color 0.3s ease 0s',
+                                                    }}
                                                 />
                                                 {isHovered[5] && (
                                                     <img
@@ -101,7 +117,11 @@ function Navbar({
                                                         width="35px"
                                                         height="auto"
                                                         alt="Highlighted Image"
-                                                        className={`absolute opacity-${isHovered[5] ? '80' : '20'} transition-opacity duration-300 ease-in-out`}
+                                                        style={{
+                                                            position: 'absolute',
+                                                            opacity: isHovered[5] ? 0.8 : 0.2,
+                                                            transition: 'opacity 0.3s ease',
+                                                        }}
                                                     />
                                                 )}
                                             </div>
@@ -110,11 +130,16 @@ function Navbar({
                         </>
                     </div>)
             }
-            <div className="flex items-center justify-center z-[9999999]">
+            <div className="left-side" style={{ alignItems: "center", justifyContent: "center", display: 'flex', zIndex: 9999999 }}>
                 <>
                     {buildViewerNumber != 1 ? (
                         <div className="wallet-buttons" style={{ marginTop: "3vh", zIndex: 9999999, display: "flex", alignItems: "center", gap: "4vh" }}>
-                            <img src="/leaderboard.png" alt="leaderboard" style={{width: "6vh", height: "6vh", marginTop: "4vh", cursor: "pointer"}} onClick={() => { setbuildViewerNumber(4); }} />
+                            {
+                                leaderBoardActive ?
+                                <img src="/leaderboardhighlight.png" alt="leaderboard" style={{width: "6vh", height: "6vh", marginTop: "4vh", cursor: "pointer"}} onMouseLeave={() => setLeaderboardActive(false)} onClick={() => { setbuildViewerNumber(4); }} />
+                                :
+                                <img src="/leaderboard.png" alt="leaderboard" style={{width: "6vh", height: "6vh", marginTop: "4vh", cursor: "pointer"}} onMouseEnter={() => setLeaderboardActive(true)} onClick={() => { setbuildViewerNumber(4); }} />
+                            }
                             <WalletMultiButton />
                         </div>
                     ) : (

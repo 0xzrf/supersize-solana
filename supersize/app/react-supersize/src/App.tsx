@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import CreateGameComponent from "./components/CreateGameComponent";
 import Alert from "./components/Alert";
+import "./output.css";
 import { updateWins } from "./helper/db";
 
 import {

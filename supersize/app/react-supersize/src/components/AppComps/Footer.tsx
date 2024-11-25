@@ -31,13 +31,26 @@ function Footer({
     openTG,
 }: FooterProps) {
     return (
-        <div className="h-[7vh] w-full flex items-center z-2" style={{ display: gameId == null && gameEnded == 0 && buildViewerNumber != 1 ? 'flex' : 'none', alignItems: "center", justifyContent: "center" }}>
-            <div className={`h-[40px] items-center justify-center ${!isMobile ? 'flex' : 'hidden'} p-[10px] ml-[2vw] text-white font-['terminus']`}>
-                <div className="flex items-center justify-center p-2.5 border border-white/30 border-r-0">TPS: {currentTPS}</div>
-                <div className="flex items-center justify-center p-2.5 border border-white/30"><img src={`${process.env.PUBLIC_URL}/solana-logo.png`} width="20px" height="auto" alt="Image" className="w-[1vw] mr-[10px]" /> ${Math.round(price)}</div>
+        <div className="linksFooter" style={{ display: gameId == null && gameEnded == 0 && buildViewerNumber != 1 ? 'flex' : 'none', alignItems: "center", justifyContent: "center" }}>
+            <div style={{ height: "40px", alignItems: "center", justifyContent: "center", display: !isMobile ? 'flex' : 'none', padding: "10px", marginLeft: "2vw", color: "white", fontFamily: "terminus" }}>
+                <div className="tps">TPS: {currentTPS}</div>
+                <div className="solprice"><img src={`${process.env.PUBLIC_URL}/solana-logo.png`} width="20px" height="auto" alt="Image" style={{ width: "1vw", marginRight: "10px" }} /> ${Math.round(price)}</div>
             </div>
             <div
-                className={`h-[40px] absolute flex items-center justify-center ${buildViewerNumber == 0 ? 'flex' : 'hidden'} p-[10px] mx-auto text-white font-['terminus'] flex-col cursor-pointer`}
+                style={{
+                    height: "40px",
+                    position: "absolute",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: buildViewerNumber == 0 ? "flex" : 'none',
+                    padding: "10px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    color: "white",
+                    fontFamily: "terminus",
+                    flexDirection: "column",
+                    cursor: "pointer"
+                }}
                 onClick={() => setbuildViewerNumber(1)}
             >
                 Learn More
@@ -46,13 +59,26 @@ function Footer({
                     width="20px"
                     height="auto"
                     alt="Image"
-                    className="mt-0 animate-bounce"
+                    style={{
+                        marginTop: "0vh",
+                        animation: "bounce 2s infinite",
+                    }}
                     onClick={() => setbuildViewerNumber(1)}
                 />
             </div>
-            <div className="ml-auto flex bg-black mr-[2vw] text-white border border-[#FFFFFF4D] h-[40px] font-['Terminus']" style={{ display: !isMobile ? 'flex' : 'none' }}>
+            <div className="solstats" style={{ display: !isMobile ? 'flex' : 'none' }}>
                 <div
-                    className="w-[35px] h-[40px] hover:cursor-pointer flex cursor-pointer items-center justify-center border-r border-[#FFFFFF4D] px-[3px]"
+                    style={{
+                        width: '35px',
+                        height: '40px',
+                        display: 'flex',
+                        cursor: "pointer",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRight: "1px solid #FFFFFF4D",
+                        paddingLeft: "3px",
+                        paddingRight: "3px",
+                    }}
                     onMouseEnter={() => setIsHovered([false, false, true, false, false])}
                     onMouseLeave={() => setIsHovered([false, false, false, false, false])}
                     onClick={openDocs}
@@ -71,7 +97,17 @@ function Footer({
                    </svg>
                 </div>
                 <div
-                    className="w-[35px] h-[40px] flex cursor-pointer items-center justify-center px-[5px] border-r border-[#FFFFFF4D]"
+                    style={{
+                        width: '35px',
+                        height: '40px',
+                        display: 'flex',
+                        cursor: "pointer",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        paddingLeft: "5px",
+                        paddingRight: "5px",
+                        borderRight: "1px solid #FFFFFF4D",
+                    }}
                     onMouseEnter={() => setIsHovered([false, false, false, true, false])}
                     onMouseLeave={() => setIsHovered([false, false, false, false, false])}
                     onClick={openX}
@@ -90,22 +126,36 @@ function Footer({
                     </svg>
                 </div>
                 <div
-                    className="w-[45px] h-[40px] flex items-center justify-center border-r border-[#FFFFFF4D] px-[10px] cursor-pointer"
+                    style={{
+                        width: '45px', // Increased width
+                        height: '40px', // Increased height
+                        display: 'flex',
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRight: "1px solid #FFFFFF4D",
+                        paddingLeft: "10px",
+                        paddingRight: "10px",
+                        cursor: "pointer",
+                    }}
                     onMouseEnter={() => setIsHovered([false, false, false, false, true])}
                     onMouseLeave={() => setIsHovered([false, false, false, false, false])}
                     onClick={openTG}
                 >
                   <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="80"
-                      height="80"
+                      width="80" // Increased width
+                      height="80" // Increased height
                       viewBox="0 0 24 24"
-                      className={`${isHovered[4] ? 'fill-[gold]' : 'fill-white'}`}
+                      style={{
+                          fill: isHovered[4] ? "gold" : "white", // Change color to gold on hover
+                          transform: "",
+                          msFilter: ""
+                      }}
                   >
                       <path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"></path>
                   </svg>
                 </div>
-                <div className="items-center m-2.5">© Supersize Inc. 2024</div>
+                <div className="csupersize">© Supersize Inc. 2024</div>
             </div>
         </div>
     )
