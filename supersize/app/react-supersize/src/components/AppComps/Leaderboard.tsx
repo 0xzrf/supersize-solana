@@ -63,15 +63,13 @@ const Leaderboard: React.FC<{ setbuildViewerNumber: (number: number) => void }> 
                 position: res.data.position,
                 points: res.data.points
             })
-
-
+            console.log("topParticipants:::::",res.data.topParticipants)
             const participants = res.data.topParticipants.map((participant: any) => (
                 { 
                     name: participant.name, 
-                    total: participant.winning.usdc
+                    total: participant.winAmount
                 }
             ))
-
             setUsers(participants)
 
         })()
