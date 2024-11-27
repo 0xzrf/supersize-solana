@@ -5,7 +5,7 @@ import CreateGame from "./components/CreateGame";
 import GameComponent from "./components/GameComponent";
 import CreateGameComponent from "./components/CreateGameComponent";
 import Alert from "./components/Alert";
-import Leaderboard from "./components/Leaderboard";
+import Leaderboard from "./components/AppComps/Leaderboard";
 
 import {
     AddEntity,
